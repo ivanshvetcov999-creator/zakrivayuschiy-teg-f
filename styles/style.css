@@ -21,8 +21,7 @@
     linear-gradient(
       to bottom,
       rgba(0, 0, 0, 0.5),
-      rgba(0, 0, 0, 0.5)), var(--page-background
-    );
+      rgba(0, 0, 0, 0.5)), var(--page-background);
   background-color: #000;
   background-size: cover;
   background-attachment: fixed;
@@ -166,6 +165,7 @@
 
 .like-icon {
   flex-shrink: 0;
+  transform-origin: center;
 }
 
 .button__text {
@@ -371,10 +371,6 @@
 .like-icon:active .main-body {
   fill: var(--contour-color);
   transition: fill 0.3s linear 0.05s;
-}
-
-.like-icon {
-  transform-origin: center;
 }
 
 .like-icon.is-liked .core {
