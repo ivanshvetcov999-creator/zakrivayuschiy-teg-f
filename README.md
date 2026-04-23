@@ -1,1 +1,1 @@
-https://ivanshvetcov999-creator.github.io/zakrivayuschiy-teg-f/
+https://github.com/ivanshvetcov999-creator/zakrivayuschiy-teg-f
