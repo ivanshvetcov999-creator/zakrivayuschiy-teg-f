@@ -12,25 +12,22 @@
 .page {
   display: flex;
   flex-direction: column;
-  gap: clamp(6.25rem, 6.3942rem + -0.6154vw, 6.125rem);
+  gap: var(--gap-header);
   min-inline-size: 320px;
   min-block-size: 100dvb;
   font-family: var(--font-main);
   font-variation-settings: 'wght' var(--weight-title);
-  background-image:
-    linear-gradient(
-      to bottom,
-      rgba(0, 0, 0, 0.5),
-      rgba(0, 0, 0, 0.5)), var(--page-background);
-  background-color: #000;
+  background-image: var(--page-background);
+  background-color: var(--section-bg);
   background-size: cover;
   background-attachment: fixed;
+  padding-bottom: var(--padding-bot);
 }
 
 .container {
   width: var(--content-width);
   margin: 0 auto;
-  border: 2px solid #000000;
+  border: 2px solid var(--border-color);
 }
 
 .header {
@@ -38,9 +35,9 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: #FFFFFF;
+  background-color: var( --section-bg);
   margin-top: var(--header-margin);
-  min-height: 368px;
+  padding-block: clamp(7.625rem, 7.0481rem + 2.4615vw, 8.125rem);
 }
 
 .header__logo {
@@ -49,7 +46,6 @@
   line-height: 100%;
   letter-spacing: 0;
   text-transform: uppercase;
-  font-variation-settings: 'wght' var(--weight-title);
 }
 
 .header_text {
@@ -79,7 +75,7 @@
 .card_title {
   font-size: 18px;
   padding-inline-start: clamp(0.625rem, 0.625rem + 0vw, 0.625rem);
-  padding: 5px;
+  padding-block: clamp(0.25rem, 0.1779rem + 0.3077vw, 0.3125rem);
 }
 
 .image {
@@ -89,22 +85,10 @@
   object-fit: cover;
 }
 
-@media (width <= 375px) {
-  .header {
-    min-height: 327px;
-  }
-
-  .save-button {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-  }
-}
-
 .card__image-container {
   position: relative;
+  border-top: 2px solid var(--border-color);
+  border-bottom: 2px solid var(--border-color);
 }
 
 .card__label {
@@ -114,7 +98,7 @@
   font-family: var(--font-accent);
   opacity: 0.5;
   font-size: 14px;
-  mix-blend-mode: difference;
+  mix-blend-mode: hard-light;
   text-shadow:
     1px 1px 0 var(--stroke-color),
     -1px -1px 0 var(--stroke-color),
@@ -146,26 +130,27 @@
   gap: 8px;
 }
 
-.card__like-button {
-  display: flex;
-  background: transparent;
-  border: none;
-  padding: 0;
-  cursor: pointer;
-}
-
-.card__like-button .button__text-container {
+.button {
   display: flex;
   align-items: center;
   justify-content: center;
+  border: 2px solid var(--border-color);
+  cursor: pointer;
+  background-color: var(--section-bg);
+  gap: 8px;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  transition: box-shadow 0.3s ease;
+}
+
+.card__like-button {
   width: 130px;
   height: 38px;
-  border: 2px solid var(--border-color, #000);
 }
 
 .like-icon {
   flex-shrink: 0;
-  transform-origin: center;
 }
 
 .button__text {
@@ -183,19 +168,15 @@
   background-color: rgb(0 0 0 / 0.75);
 }
 
-.footer {
+.save_zone {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  gap: 8px;
 }
 
 .save-button {
-  padding: 12.5px 20px;
-  background-color: var(--section-bg);
-  border: 2px solid var(--border-color);
-  cursor: pointer;
+  padding: 15.5px 19px;
 }
 
 .modal:popover-open {
@@ -204,7 +185,7 @@
   gap: 30px;
   padding: 30px;
   background-color: var(--section-bg, #fff);
-  border: 2px solid var(--border-color, #000);
+  border: 2px solid var(--border-color);
   width: clamp(21.3125rem, 20.4471rem + 3.6923vw, 22.0625rem);
 }
 
@@ -221,17 +202,7 @@
 }
 
 .modal__button {
-  width: 100%;
   padding: 10px;
-  background: transparent;
-  border: 2px solid var(--border-color, #000);
-  cursor: pointer;
-  text-transform: uppercase;
-}
-
-.modal__button .button__text {
-  font-family: var(--font-accent);
-  font-size: 14px;
 }
 
 .modal__text {
@@ -239,7 +210,6 @@
   font-size: 14px;
   text-transform: uppercase;
   line-height: 150%;
-  font-variation-settings: 'wght' var(--weight-text);
 }
 
 .image_preview_blur {
@@ -270,14 +240,14 @@
   filter: sepia(90%);
 }
 
-.card__like-button:focus, .card__like-button:focus .like-icon, .card__like-button:focus .button__text-container {
+.button:focus {
   outline: none;
   box-shadow: none;
 }
 
-.card__like-button:focus-visible .button__text-container, .save-button:focus-visible, .modal__button:focus-visible {
+.button:focus-visible {
   outline: none;
-  box-shadow: 2px 2px 0px 0px #000;
+  box-shadow: 2px 2px 0px 0px var(--border-color);
 }
 
 .card__icon-button {
@@ -292,38 +262,33 @@
 }
 
 .card__icon-button:focus-visible .like-icon {
-  outline: 2px solid #000;
+  outline: 2px solid var(--border-color);
 }
 
-.card__like-button .button__text-container, .save-button, .modal__button {
-  transition: box-shadow 0.3s ease;
-}
-
-.save-button, .modal__button, .button__text-container {
-  position: relative;
-  overflow: hidden;
-  z-index: 1;
-  background-color: #ffffff;
-}
-
-.save-button::before, .modal__button::before, .button__text-container::before {
+.button::before {
   content: '';
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: #000;
+  background-color: var(--border-color);
   z-index: -1;
   transform: translateX(-100%);
   transition: transform 0.5s ease-in-out;
 }
 
-.save-button:hover::before, .modal__button:hover::before, .button__text-container:hover::before {
+.button:hover::before {
   transform: translateX(0);
 }
 
-.save-button .button__text, .save-button .save-button__icon, .modal__button .button__text, .button__text-container .button__text {
+.save-button__icon {
+  width: var(--icon-size);
+  height: var(--icon-size);
+  flex-shrink: 0;
+}
+
+.save-button .button__text, .save-button .save-button__icon, .modal__button .button__text, .card__like-button .button__text {
   position: relative;
   z-index: 2;
   color: var(--section-bg);
@@ -332,6 +297,10 @@
 
 .sparks {
   opacity: 0;
+}
+
+.heart {
+  transform-origin: center;
 }
 
 .like-icon .contour {
@@ -394,4 +363,26 @@
 
 .like-icon.is-liked .sparks {
   animation: sparksFlash 0.3s ease-in 0.3s forwards;
+}
+
+@media (width <= 375px) {
+  .page {
+    gap: 100px;
+  }
+
+  .card_title {
+    padding-inline-end: 10px;
+  }
+
+  .save-button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .save-button__icon {
+    width: 28px;
+    height: 28px;
+  }
 }
